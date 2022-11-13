@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-dbName = "Ironhack"
+dbName = "Project_4"
 password=os.getenv("SQL")
 
 
