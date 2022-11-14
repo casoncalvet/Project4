@@ -8,7 +8,7 @@ load_dotenv()
 dbName = "Project_4"
 password=os.getenv("SQL")
 
-
 connectionData = f"mysql+pymysql://root:{password}@localhost/{dbName}"
 engine = alch.create_engine(connectionData)
+
 

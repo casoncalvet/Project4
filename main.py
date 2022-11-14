@@ -3,8 +3,11 @@ import random
 import numpy as np
 import markdown.extensions.fenced_code
 import tools.sql_queries as sqll
-from nltk.sentiment.vader import SentimentIntensityAnalyzer
-sia = SentimentIntensityAnalyzer()
+from IPython.display import Image
+
+#from nltk.sentiment.vader import SentimentIntensityAnalyzer
+#nltk.downloader.download('vader_lexicon')
+#sia = SentimentIntensityAnalyzer()
 
 app = Flask(__name__)
 
@@ -16,35 +19,39 @@ def readme ():
 
 # GET ENDPOINTS: SQL 
 # SQL get everything
+@app.route("/entities/")
+def ents ():
+    return jsonify(sqll.get_entities())
+
 @app.route("/sql/")
 def sql ():
-    return jsonify(sqll.get_everything())
-
-@app.route("/sql/<name>", )
-def lines_from_characters (name):
-    return jsonify(sqll.get_everything_from_character(name))
+    return jsonify(sqll.get_all())
 
 
-@app.route("/sa/<name>/", )
-def sa_from_character (name):
-    everything = sqll.get_just_dialogue(name)
-    #return jsonify(everything)
-    return jsonify([sia.polarity_scores(i["dialogue"])["compound"] for i in everything])
+@app.route("/sql/<name>")
+def get_messages_person (name):
+    return jsonify(sqll.get_everything_from_person(name))
 
+@app.route("/frequency/")
+def freq ():
+    return jsonify(sqll.get_freq())
+
+@app.route("/sentiment/")
+def sentiment ():
+    return jsonify(sqll.get_Sentiment())
 
 ####### POST
 @app.route("/insertrow", methods=["POST"])
 def try_post ():
     # Decoding params
     my_params = request.args
-    scene = my_params["scene"]
-    character_name = my_params["character_name"]
-    dialogue = my_params["dialogue"]
-
-    # Passing to my function: do the inserr
-    sqll.insert_one_row(scene, character_name, dialogue)
+    print(my_params)
+    Name = my_params["Name"]
+    Message = my_params["Message"]
+    # Passing to my function: do the insert
+    sqll.insert_one_row(Name,Message)
     return f"Query succesfully inserted"
-
 
 if __name__ == "__main__":
     app.run(port=9000, debug=True)
+

@@ -116,3 +116,16 @@ def get_polarity_scores(dtfr):
 sent_dict= get_sentiment(iMessages)
 
 pol_dict=get_polarity_scores(iMessages)
+
+def Word_Cloud(df, name): 
+    """
+    Get word clouds for each person
+    """
+    #df.set_index('Name', inplace= True, drop=True)
+    wordcloud= WordCloud(width=1600,height=400, max_words= 50, min_word_length=3,colormap='Set2').generate(" ".join(set(df.loc[name][0].split(" "))))
+    plt.figure(figsize=(15,10), facecolor="k")
+    plt.imshow(wordcloud)
+    plt.axis("off")
+    plt.tight_layout(pad=0)
+    plt.savefig(f'../images/{name}.png', facecolor='k', bbox_inches='tight')
+    plt.show();
