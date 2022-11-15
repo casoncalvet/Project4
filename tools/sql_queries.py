@@ -5,6 +5,9 @@ from config.sql_connection import engine
 import pandas as pd
 import spacy
 from spacy import displacy
+from nltk.sentiment.vader import SentimentIntensityAnalyzer
+from nltk.corpus import stopwords
+#nltk.downloader.download('vader_lexicon')
 NER = spacy.load("en_core_web_sm")
 
 
@@ -113,9 +116,18 @@ def insert_one_row (Name, Message):
     engine.execute(query)
     return f"Correctly introduced!"
 
+def get_polarity_scores(): 
+    query= f"""
+    SELECT * 
+    FROM iMessages;
+    """ 
+    df= pd.read_sql_query(query, engine)
+    df.set_index('Name', drop= True, inplace= True)
+    sia = SentimentIntensityAnalyzer()
+    pol_dict= {}
+    for i in df.index:  
+        pol_dict[i]= sia.polarity_scores(df.loc[i][df.columns[0]])
+    pol_dict
+    return pol_dict
 
 
-# sia by person
-# length by person
-# frequency of words by person
-# entities recognition

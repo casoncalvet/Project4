@@ -40,6 +40,9 @@ def freq ():
 def sentiment ():
     return jsonify(sqll.get_Sentiment())
 
+@app.route("/polarity/")
+def polarity ():
+    return jsonify(sqll.get_polarity_scores())
 
 ####### POST
 @app.route("/insertrow", methods=["POST"])
