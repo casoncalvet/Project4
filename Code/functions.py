@@ -1,4 +1,22 @@
 
+import requests
+import pandas as pd
+from wordcloud import WordCloud
+import matplotlib.pyplot as plt
+import sqlalchemy as sqlalc
+import os
+from dotenv import load_dotenv
+import os
+import pandas as pd
+import spacy
+import re
+from textblob import TextBlob
+import nltk
+from nltk.sentiment.vader import SentimentIntensityAnalyzer
+from nltk.corpus import stopwords
+sia = SentimentIntensityAnalyzer()
+from imessage_reader import fetch_data
+
 def get_messages ():
     fd = fetch_data.FetchData()
     messages  = fd.get_messages()
