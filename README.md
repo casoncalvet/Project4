@@ -62,6 +62,8 @@ Use the api:
 <br>
 - /name: Query by friend name
 <br>
+- /polarity: Get overall polarity of messages from each friend 
+<br>
 - /entities: Retrieve entities mentioned per friend
 <br>
 - /frequency: Retrieve relative frequency of texts per person 
