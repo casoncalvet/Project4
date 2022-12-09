@@ -4,8 +4,6 @@
 
 
 <div align="center">
-<iframe src="https://giphy.com/embed/RiEI5H02TJREuDON0f" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><aa></p>
-<div> 
 
 <br>
 <br>
